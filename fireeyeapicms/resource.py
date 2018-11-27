@@ -1,4 +1,4 @@
-import fireeyeapi.client as cli
+import fireeyeapicms.client as cli
 import urllib
 import json
 import time
@@ -105,7 +105,7 @@ class SearchEmail(Resource):
                     count_rec = num_rec if num_rec < self.page_count else self.page_count
                     self.page_processed +=count_rec
                     #increment offset
-                    self.params[self.offset_key]=self.page_count+1
+                    self.params[self.offset_key]=self.page_processed
                 return result
             else:
                 #no total column

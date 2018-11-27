@@ -1,7 +1,7 @@
 import unittest
-import fireeyeapi.client as cli
-import fireeyeapi.resource as resources
-import fireeyeapi.utility as util
+import fireeyeapicms.client as cli
+import fireeyeapicms.resource as resources
+import fireeyeapicms.utility as util
 import json
 import time
 
@@ -69,7 +69,7 @@ class Login(unittest.TestCase):
             if result["status"]=="Success":
                 if result["data"]["job_status"]=="completed":
                     self.assertEqual(result["data"]["job_status"],"completed")
-                    self.assertEqual(len(result["data"]["list"]),4)
+                    self.assertEqual(len(result["data"]["list"]),25)
                     pass
                     #handle data here
                     break
@@ -84,21 +84,30 @@ class Login(unittest.TestCase):
     def test_page(self):
         client = cli.FireClient(USER,PASSWORD,SERVER,False)
         search = util.SearchUtil(client,
-                        num=1,
+                        num=20,
                         sender_address=SENDER,
                         start_date=SEARCH_DATE,
                         end_date=SEARCH_DATE)
         all_data = search.search()
-        self.assertEqual(len(all_data),4)
+        self.assertEqual(len(all_data),102)
 
-    def test_no_page(self):
+    def test_default_page(self):
         client = cli.FireClient(USER,PASSWORD,SERVER,False)
         search = util.SearchUtil(client,
                         sender_address=SENDER,
                         start_date=SEARCH_DATE,
                         end_date=SEARCH_DATE)
         all_data = search.search()
-        self.assertEqual(len(all_data),4)
+        self.assertEqual(len(all_data),102)
+
+    def test_no_results(self):
+        client = cli.FireClient(USER,PASSWORD,SERVER,False)
+        search = util.SearchUtil(client,
+                        sender_address="xxxxx@xxxx.com",
+                        start_date=SEARCH_DATE,
+                        end_date=SEARCH_DATE)
+        all_data = search.search()
+        self.assertEqual(len(all_data),0)
 
 if __name__ == "__main__":
     unittest.main()

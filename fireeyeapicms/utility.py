@@ -1,5 +1,5 @@
-import fireeyeapi.client as cli
-import fireeyeapi.resource as res
+import fireeyeapicms.client as cli
+import fireeyeapicms.resource as res
 import time
 import datetime
 

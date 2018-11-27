@@ -2,10 +2,10 @@ from setuptools import setup
 with open("README.md","r") as fh:
     long_description = fh.read()
 setup(
-    name='demistoapi',
-    version='0.1',
+    name='fireeyeapicms',
+    version='0.3',
     packages=[
-        "fireeyeapi",
+        "fireeyeapicms",
     ],
     license='MIT',
     long_description=long_description,
